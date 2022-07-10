@@ -36,20 +36,20 @@ def createDownloading(filename,totalBits,currentBits,speed,time,tid=''):
     msg+= '📶Velocidad: ' + str(sizeof_fmt(speed))+'/s\n'
     msg+= '🕐Tiempo: ' + str(datetime.timedelta(seconds=int(time))) +'\n\n'
 
-    msg = '📡 Descargando Archivo....\n\n'
-    msg += '➤ Archivo: '+filename+'\n'
+    msg = '📥 Descargando Archivo....\n\n'
+    msg += '👉 Archivo: '+filename+'\n'
     msg += text_progres(currentBits,totalBits)+'\n'
-    msg += '➤ Porcentaje: '+str(porcent(currentBits,totalBits))+'%\n\n'
-    msg += '➤ Total: '+sizeof_fmt(totalBits)+'\n\n'
-    msg += '➤ Descargado: '+sizeof_fmt(currentBits)+'\n\n'
-    msg += '➤ Velocidad: '+sizeof_fmt(speed)+'/s\n\n'
-    msg += '➤ Tiempo de Descarga: '+str(datetime.timedelta(seconds=int(time)))+'s\n\n'
+    msg += '📊 Porcentaje: '+str(porcent(currentBits,totalBits))+'%\n\n'
+    msg += '🗂 Total: '+sizeof_fmt(totalBits)+'\n\n'
+    msg += '🗂 Descargado: '+sizeof_fmt(currentBits)+'\n\n'
+    msg += '📶 Velocidad: '+sizeof_fmt(speed)+'/s\n\n'
+    msg += '🕖 Tiempo de Descarga: '+str(datetime.timedelta(seconds=int(time)))+'s\n\n'
 
     if tid!='':
         msg+= '/cancel_' + tid
     return msg
 def createUploading(filename,totalBits,currentBits,speed,time,originalname=''):
-    msg = '⏫Subiendo A La Nube☁... \n\n'
+    msg = '⏫Subiendo a la Nube☁... \n\n'
     msg+= '🔖Nombre: ' + str(filename)+'\n'
     if originalname!='':
         msg = str(msg).replace(filename,originalname)
@@ -59,17 +59,17 @@ def createUploading(filename,totalBits,currentBits,speed,time,originalname=''):
     msg+= '📶Velocidad: ' + str(sizeof_fmt(speed))+'/s\n'
     msg+= '🕐Tiempo: ' + str(datetime.timedelta(seconds=int(time))) +'\n'
 
-    msg = '⏫ Subiendo A La Nube☁...\n\n'
-    msg += '➤ Nombre: '+filename+'\n'
+    msg = '⏫ Subiendo a la Nube☁...\n\n'
+    msg += '📕 Nombre: '+filename+'\n'
     if originalname!='':
         msg = str(msg).replace(filename,originalname)
-        msg+= '➤ Nombre: ' + str(filename)+'\n'
+        msg+= '🔖 Nombre: ' + str(filename)+'\n'
     msg += text_progres(currentBits,totalBits)+'\n'
-    msg += '➤ Porcentaje: '+str(porcent(currentBits,totalBits))+'%\n\n'
-    msg += '➤ Total: '+sizeof_fmt(totalBits)+'\n\n'
-    msg += '➤ Descargado: '+sizeof_fmt(currentBits)+'\n\n'
-    msg += '➤ Velocidad: '+sizeof_fmt(speed)+'/s\n\n'
-    msg += '➤ Tiempo de Descarga: '+str(datetime.timedelta(seconds=int(time)))+'s\n\n'
+    msg += '📊 Porcentaje: '+str(porcent(currentBits,totalBits))+'%\n\n'
+    msg += '🗂 Total: '+sizeof_fmt(totalBits)+'\n\n'
+    msg += '📥 Descargado: '+sizeof_fmt(currentBits)+'\n\n'
+    msg += '📶 Velocidad: '+sizeof_fmt(speed)+'/s\n\n'
+    msg += '🕐 Tiempo de Descarga: '+str(datetime.timedelta(seconds=int(time)))+'s\n\n'
 
     return msg
 def createCompresing(filename,filesize,splitsize):
@@ -117,8 +117,8 @@ def createFilesMsg(evfiles):
     return msg
 def createStat(username,userdata,isadmin):
     from pyobigram.utils import sizeof_fmt
-    msg = '⚙️Condiguraciones De Usuario⚙️\n\n'
-    msg+= '🔖Nombre: @' + str(username)+'\n'
+    msg = '⚙️ Configuraciones de Usuario ⚙️\n\n'
+    msg+= '📕Nombre: @' + str(username)+'\n'
     msg+= '📑User: ' + str(userdata['moodle_user'])+'\n'
     msg+= '🗳Password: ' + str(userdata['moodle_password'])+'\n'
     msg+= '📡Host: ' + str(userdata['moodle_host'])+'\n'
@@ -128,7 +128,7 @@ def createStat(username,userdata,isadmin):
     msg+= '📟UpType: ' + str(userdata['uploadtype'])+'\n'
     if userdata['cloudtype'] == 'cloud':
         msg+= '🗂Dir: /' + str(userdata['dir'])+'\n'
-    msg+= '📚Tamaño de Zips : ' + sizeof_fmt(userdata['zips']*1024*1024) + '\n\n'
+    msg+= '📦Tamaño de Zips : ' + sizeof_fmt(userdata['zips']*1024*1024) + '\n\n'
     msgAdmin = 'No'
     if isadmin:
         msgAdmin = 'Si'
@@ -141,5 +141,5 @@ def createStat(username,userdata,isadmin):
        tokenize = 'SI'
     msg+= '🔌Proxy : ' + proxy + '\n'
     msg+= '🔮Tokenize : ' + tokenize + '\n\n'
-    msg+= '⚙️Configurar Moodle⚙️\n🤜Ejemplo /account user,password👀'
+    msg+= '⚙️Configurar Moodle⚙️\n🤜Ejemplo /account user,password 👀'
     return msg
