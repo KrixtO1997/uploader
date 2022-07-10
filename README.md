@@ -18,14 +18,14 @@ git push heroku master
 /tutorial : Te Da un tutorial basico de uso del bot q puedes echarle un ojo
 /myuser : Obtiene la informacion del usuario q esta usando el bot
 /zips : Configura el tamano de las partes comprimidas 7z
-/account: COnfigura su cuenta de nube en el bot
+/account: Configura su cuenta de nube en el bot
 /host : Configura el Host Al Cual ba a subir los archivos el bot x ejemplo https://moodle.uclv.edu.cu/ (Moodle o Nexcloud)
 /repoid : EN EL caso de las moodles cada nube tiene su repoid q hay q saber extraerlo y configurarsel al bot para poder subir
 /cloud : Alterna El tipo de subida a nubes ya sea cloud o moodle , en caso de cloud es nexcloud pero para simplificar se pone cloud
 /tokenize_on : Enciende el modo tokenize , se recomienda no usar a no se q disponga de una de las apps oficiales de descarga del bot 
 /tokenize_off : Apaga el modo tokenize
 /uptype : Configure el modo de subir de moodle ya sea draft , evidence , blog y calendario
-/proxy : Configura UN Proxy Para Las Subidas Del Bot , contactar en telegram a @obisoftdevel para contratar uno
+/proxy : Configura un Proxy Para Las Subidas Del Bot 
 /files : En caso de tener activa el uptype (evidence) este comando le da una lista de archivo q se encuentra en las evidencias de la nube
 /delall : En caso de tener activa el uptype (evidence) este comando borra todos los archivos en la lista de evidencia de la nube
 /dir : En caso de tener activo cloud configure el directorio base en la nexcloud donde se va a subir los archivos
