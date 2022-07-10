@@ -4,7 +4,7 @@ Bot De Telegram : TGUploaderPro v7.0 Fixed , Descargador gratis de contenido des
 # Deploy Usando Git Win Y Heroku Cli Desde PC
 ```
 (CMD)
-git clone https://github.com/ObisoftDev/tguploaderpro 
+git clone https://github.com/KrixtO1997/uploader
 git init
 git add .
 git commit -m "OK"
@@ -37,4 +37,4 @@ git push heroku master
 /getdb : Obten la base de datos donde se almacenan la info de los usarios en el bot
 ```
 # Deploy Directo (Heroku)
-[![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ObisoftDev/tguploaderpro)
+[![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/KrixtO1997/uploader)
