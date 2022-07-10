@@ -14,27 +14,27 @@ git push heroku master
 ```
 
 # Comandos En El Bot (Usuarios Nomales)
-```/start : Inicar Bot , Te Da La INfo
-/tutorial : Te Da un tutorial basico de uso del bot q puedes echarle un ojo
-/myuser : Obtiene la informacion del usuario q esta usando el bot
-/zips : Configura el tamano de las partes comprimidas 7z
-/account: Configura su cuenta de nube en el bot
-/host : Configura el Host Al Cual ba a subir los archivos el bot x ejemplo https://moodle.uclv.edu.cu/ (Moodle o Nexcloud)
-/repoid : EN EL caso de las moodles cada nube tiene su repoid q hay q saber extraerlo y configurarsel al bot para poder subir
-/cloud : Alterna El tipo de subida a nubes ya sea cloud o moodle , en caso de cloud es nexcloud pero para simplificar se pone cloud
-/tokenize_on : Enciende el modo tokenize , se recomienda no usar a no se q disponga de una de las apps oficiales de descarga del bot 
+```/start : Inicar Bot , Muestra la información de bienvenida al Bot
+/tutorial : Muestra un tutorial básico de uso del bot.
+/myuser : Obtiene la información del usuario que está utilizando el Bot
+/zips : Configura el tamaño de las partes comprimidas 7z
+/account: Configura su cuenta de nube en el Bot
+/host : Configura el Host al cual se va a subir los archivos por ejemplo https://moodle.uclv.edu.cu/ (Moodle o Nexcloud)
+/repoid : Cambia el repid de la moodle (En el caso de las moodles cada nube tiene su repoid q hay q saber extraerlo para poder configurarselo al Bot)
+/cloud : Alterna el tipo de subida a nubes ya sea cloud o moodle , en caso de cloud es nexcloud pero para simplificar se pone cloud
+/tokenize_on : Enciende el modo tokenize , se recomienda no usar a no ser q disponga de una de las apps oficiales de descarga del bot 
 /tokenize_off : Apaga el modo tokenize
-/uptype : Configure el modo de subir de moodle ya sea draft , evidence , blog y calendario
-/proxy : Configura un Proxy Para Las Subidas Del Bot 
-/files : En caso de tener activa el uptype (evidence) este comando le da una lista de archivo q se encuentra en las evidencias de la nube
+/uptype : Configura el modo de subir de moodle ya sea draft , evidence , blog y calendario
+/proxy : Configura un Proxy para las subidas del Bot 
+/files : En caso de tener activa el uptype (evidence) este comando le da una lista de archivos que se encuentra en las evidencias de la nube
 /delall : En caso de tener activa el uptype (evidence) este comando borra todos los archivos en la lista de evidencia de la nube
-/dir : En caso de tener activo cloud configure el directorio base en la nexcloud donde se va a subir los archivos
+/dir : En caso de tener activo cloud configura el directorio base en la nexcloud donde se van a subir los archivos
 ```
 
 # Comandos En El Bot (Administrador) 
-```/adduser : permite un usuario de telegram tener acceso al bot
-/banuser : quita acceso al bot de un usuario de telegram
-/getdb : Obten la base de datos donde se almacenan la info de los usarios en el bot
+```/adduser : Permite a un usuario de telegram tener acceso al Bot
+/banuser : Quita el acceso al Bot de un usuario de telegram
+/getdb : Obtén la base de datos donde se almacenan la info de los usuarios en el Bot
 ```
 # Deploy Directo (Heroku)
 [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/KrixtO1997/uploader)
