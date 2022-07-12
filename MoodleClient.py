@@ -65,7 +65,7 @@ class MoodleClient(object):
 
     def getsession(self):
         return self.session
-
+    
     def getUserData(self):
         try:
             tokenUrl = self.path+'login/token.php?service=moodle_mobile_app&username='+urllib.parse.quote(self.username)+'&password='+urllib.parse.quote(self.password)
@@ -80,7 +80,8 @@ class MoodleClient(object):
         tokens = str(url).split('/')
         direct = self.path+'webservice/pluginfile.php/'+tokens[4]+'/user/private/'+tokens[-1]+'?token='+self.data['token']
         return direct
-
+    def getCurrentUrl(url):
+        return url
     def getSessKey(self):
         fileurl = self.path + 'my/#'
         resp = self.session.get(fileurl,proxies=self.proxy,headers=self.baseheaders)
@@ -495,6 +496,8 @@ class MoodleClient(object):
             data = self.parsejson(resp2.text)
             data['url'] = str(data['url']).replace('\\','')
             data['normalurl'] = data['url']
+            urlfinal = str(data['url']).replace('\\','')
+            getCurrentUrl(urlfinal)
             if self.userdata:
                 if 'token' in self.userdata and not tokenize:
                     data['url'] = str(data['url']).replace('pluginfile.php/','webservice/pluginfile.php/') + '?token=' + self.userdata['token']
