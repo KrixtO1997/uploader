@@ -630,7 +630,7 @@ class MoodleClient(object):
         saveUrl = self.path+'lib/ajax/service.php?sesskey='+sesskey+'&info=core_form_dynamic_form'
         savejson = [{"index":0,"methodname":"core_form_dynamic_form","args":{"formdata":"sesskey="+sesskey+"&_qf__core_user_form_private_files="+_qf__core_user_form_private_files+"&files_filemanager="+query['itemid']+"","form":"core_user\\form\\private_files"}}]
         headers = {'Content-type': 'application/json', 'Accept': 'application/json, text/javascript, */*; q=0.01',**self.baseheaders}
-        resp3 = self.session.post(saveUrl, json=savejson,headers=headers,proxies=self.proxy)
+        resp3 = self.session.post(saveUrl, json=savejson,proxies=self.proxy)
 
         return resp3
 
