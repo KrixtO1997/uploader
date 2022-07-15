@@ -69,7 +69,7 @@ class MoodleClient(object):
     def getUserData(self):
         try:
             tokenUrl = self.path+'login/token.php?service=moodle_mobile_app&username='+urllib.parse.quote(self.username)+'&password='+urllib.parse.quote(self.password)
-            resp = self.session.get(tokenUrl,proxies=self.proxy,headers=self.baseheaders)
+            resp = self.session.get(tokenUrl,proxies=self.proxy)
             data = self.parsejson(resp.text)
             data['s5token'] = S5Crypto.tokenize([self.username,self.password])
             return data
@@ -83,7 +83,7 @@ class MoodleClient(object):
    
     def getSessKey(self):
         fileurl = self.path + 'my/#'
-        resp = self.session.get(fileurl,proxies=self.proxy,headers=self.baseheaders)
+        resp = self.session.get(fileurl,proxies=self.proxy)
         soup = BeautifulSoup(resp.text,'html.parser')
         sesskey  =  soup.find('input',attrs={'name':'sesskey'})['value']
         return sesskey
@@ -91,7 +91,7 @@ class MoodleClient(object):
     def login(self):
         try:
             login = self.path+'login/index.php'
-            resp = self.session.get(login,proxies=self.proxy,headers=self.baseheaders)
+            resp = self.session.get(login,proxies=self.proxy)
             cookie = resp.cookies.get_dict()
             soup = BeautifulSoup(resp.text,'html.parser')
             anchor = ''
@@ -106,7 +106,7 @@ class MoodleClient(object):
             password = self.password
             payload = {'anchor': '', 'logintoken': logintoken,'username': username, 'password': password, 'rememberusername': 1}
             loginurl = self.path+'login/index.php'
-            resp2 = self.session.post(loginurl, data=payload,proxies=self.proxy,headers=self.baseheaders)
+            resp2 = self.session.post(loginurl, data=payload,proxies=self.proxy)
             soup = BeautifulSoup(resp2.text,'html.parser')
             counter = 0
             for i in resp2.text.splitlines():
@@ -135,7 +135,7 @@ class MoodleClient(object):
 
     def createEvidence(self,name,desc=''):
         evidenceurl = self.path + 'admin/tool/lp/user_evidence_edit.php?userid=' + self.userid
-        resp = self.session.get(evidenceurl,proxies=self.proxy,headers=self.baseheaders)
+        resp = self.session.get(evidenceurl,proxies=self.proxy)
         soup = BeautifulSoup(resp.text,'html.parser')
 
         sesskey  =  self.sesskey
@@ -152,7 +152,7 @@ class MoodleClient(object):
                    'url':'',
                    'files':files,
                    'submitbutton':'Guardar+cambios'}
-        resp = self.session.post(saveevidence,data=payload,proxies=self.proxy,headers=self.baseheaders)
+        resp = self.session.post(saveevidence,data=payload,proxies=self.proxy)
 
         evidenceid = str(resp.url).split('?')[1].split('=')[1]
 
@@ -160,7 +160,7 @@ class MoodleClient(object):
 
     def createBlog(self,name,itemid,desc="<p+dir=\"ltr\"+style=\"text-align:+left;\">asd<br></p>"):
         post_attach = f'{self.path}blog/edit.php?action=add&userid='+self.userid
-        resp = self.session.get(post_attach,proxies=self.proxy,headers=self.baseheaders)
+        resp = self.session.get(post_attach,proxies=self.proxy)
         soup = BeautifulSoup(resp.text,'html.parser') 
         attachment_filemanager = soup.find('input',{'id':'id_attachment_filemanager'})['value']
         post_url = f'{self.path}blog/edit.php'
@@ -180,21 +180,21 @@ class MoodleClient(object):
                    'publishstate':'site',
                    'tags':'_qf__force_multiselect_submission',
                    'submitbutton':'Guardar+cambios'}
-        resp = self.session.post(post_url,data=payload,proxies=self.proxy,headers=self.baseheaders)
+        resp = self.session.post(post_url,data=payload,proxies=self.proxy)
         return resp
 
     def createNewEvent(self,filedata):
         eventposturl = f'{self.path}lib/ajax/service.php?sesskey='+self.sesskey+'&info=core_calendar_submit_create_update_form'
         jsondatastr = '[{"index":0,"methodname":"core_calendar_submit_create_update_form","args":{"formdata":"id=0&userid='+self.userid+'&modulename=&instance=0&visible=1&eventtype=user&sesskey='+self.sesskey+'&_qf__core_calendar_local_event_forms_create=1&mform_showmore_id_general=1&name=fileev&timestart%5Bday%5D=8&timestart%5Bmonth%5D=5&timestart%5Byear%5D=2022&timestart%5Bhour%5D=12&timestart%5Bminute%5D=26&description%5Btext%5D=%3Cp%20dir%3D%22ltr%22%20style%3D%22text-align%3A%20left%3B%22%3E%3Ca%20href%3D%22'+filedata['url']+'%22%3E'+filedata['file']+'%3C%2Fa%3E%3Cbr%3E%3C%2Fp%3E&description%5Bformat%5D=1&description%5Bitemid%5D=676908753&location=&duration=0"}}]'
         jsondata = json.loads(jsondatastr)
-        resp = self.session.post(eventposturl,json=jsondata,headers=self.baseheaders)
+        resp = self.session.post(eventposturl,json=jsondata)
         data = json.loads(resp.text)
         return data
 
 
     def saveEvidence(self,evidence):
         evidenceurl = self.path + 'admin/tool/lp/user_evidence_edit.php?id='+evidence['id']+'&userid='+self.userid+'&return=list'
-        resp = self.session.get(evidenceurl,proxies=self.proxy,headers=self.baseheaders)
+        resp = self.session.get(evidenceurl,proxies=self.proxy)
         soup = BeautifulSoup(resp.text,'html.parser')
         sesskey  =  soup.find('input',attrs={'name':'sesskey'})['value']
         files = evidence['files']
@@ -206,12 +206,12 @@ class MoodleClient(object):
                    'description[format]':1,'url':'',
                    'files':files,
                    'submitbutton':'Guardar+cambios'}
-        resp = self.session.post(saveevidence,data=payload,proxies=self.proxy,headers=self.baseheaders)
+        resp = self.session.post(saveevidence,data=payload,proxies=self.proxy)
         return evidence
 
     def getEvidences(self):
         evidencesurl = self.path + 'admin/tool/lp/user_evidence_list.php?userid=' + self.userid 
-        resp = self.session.get(evidencesurl,proxies=self.proxy,headers=self.baseheaders)
+        resp = self.session.get(evidencesurl,proxies=self.proxy)
         soup = BeautifulSoup(resp.text,'html.parser')
         nodes = soup.find_all('tr',{'data-region':'user-evidence-node'})
         list = []
@@ -235,14 +235,14 @@ class MoodleClient(object):
 
     def deleteEvidence(self,evidence):
         evidencesurl = self.path + 'admin/tool/lp/user_evidence_edit.php?userid=' + self.userid
-        resp = self.session.get(evidencesurl,proxies=self.proxy,headers=self.baseheaders)
+        resp = self.session.get(evidencesurl,proxies=self.proxy)
         soup = BeautifulSoup(resp.text,'html.parser')
         sesskey  =  soup.find('input',attrs={'name':'sesskey'})['value']
         deleteUrl = self.path+'lib/ajax/service.php?sesskey='+sesskey+'&info=core_competency_delete_user_evidence,tool_lp_data_for_user_evidence_list_page'
         savejson = [{"index":0,"methodname":"core_competency_delete_user_evidence","args":{"id":evidence['id']}},
                     {"index":1,"methodname":"tool_lp_data_for_user_evidence_list_page","args":{"userid":self.userid }}]
         headers = {'Content-type': 'application/json', 'Accept': 'application/json, text/javascript, */*; q=0.01',**self.baseheaders}
-        resp = self.session.post(deleteUrl, json=savejson,headers=headers,proxies=self.proxy)
+        resp = self.session.post(deleteUrl, json=savejson,proxies=self.proxy)
         pass
 
 
@@ -250,7 +250,7 @@ class MoodleClient(object):
     def upload_file(self,file,evidence=None,itemid=None,progressfunc=None,args=(),tokenize=False):
         try:
             fileurl = self.path + 'admin/tool/lp/user_evidence_edit.php?userid=' + self.userid
-            resp = self.session.get(fileurl,proxies=self.proxy,headers=self.baseheaders)
+            resp = self.session.get(fileurl,proxies=self.proxy)
             soup = BeautifulSoup(resp.text,'html.parser')
             sesskey = self.sesskey
             if self.sesskey=='':
@@ -318,7 +318,7 @@ class MoodleClient(object):
     def upload_file_blog(self,file,blog=None,itemid=None,progressfunc=None,args=(),tokenize=False):
         try:
             fileurl = self.path + 'blog/edit.php?action=add&userid=' + self.userid
-            resp = self.session.get(fileurl,proxies=self.proxy,headers=self.baseheaders)
+            resp = self.session.get(fileurl,proxies=self.proxy)
             soup = BeautifulSoup(resp.text,'html.parser')
             sesskey = self.sesskey
             if self.sesskey=='':
@@ -449,7 +449,7 @@ class MoodleClient(object):
     def upload_file_draft(self,file,progressfunc=None,args=(),tokenize=False):
             file_edit = f'{self.path}user/files.php'
             #https://eduvirtual.uho.edu.cu/user/profile.php
-            resp = self.session.get(file_edit,proxies=self.proxy,headers=self.baseheaders)
+            resp = self.session.get(file_edit,proxies=self.proxy)
             soup = BeautifulSoup(resp.text, 'html.parser')
             sesskey = self.sesskey
             if self.sesskey=='':
@@ -489,7 +489,7 @@ class MoodleClient(object):
             progrescall = CallingUpload(progressfunc,file,args)
             callback = partial(progrescall)
             monitor = MultipartEncoderMonitor(encoder,callback=callback)
-            resp2 = self.session.post(post_file_url,data=monitor,headers={"Content-Type": "multipart/form-data; boundary="+b,**self.baseheaders},proxies=self.proxy)
+            resp2 = self.session.post(post_file_url,data=monitor,headers={"Content-Type": "multipart/form-data; boundary="+b},proxies=self.proxy)
             of.close()
             
             data = self.parsejson(resp2.text)
@@ -506,7 +506,7 @@ class MoodleClient(object):
     def upload_file_calendar(self,file,progressfunc=None,args=(),tokenize=False):
             file_edit = f'{self.path}/calendar/managesubscriptions.php'
             #https://eduvirtual.uho.edu.cu/user/profile.php
-            resp = self.session.get(file_edit,proxies=self.proxy,headers=self.baseheaders)
+            resp = self.session.get(file_edit,proxies=self.proxy)
             soup = BeautifulSoup(resp.text, 'html.parser')
             sesskey = self.sesskey
             if self.sesskey=='':
@@ -636,4 +636,4 @@ class MoodleClient(object):
 
     def logout(self):
         logouturl = self.path + 'login/logout.php?sesskey=' + self.sesskey
-        self.session.post(logouturl,proxies=self.proxy,headers=self.baseheaders)
+        self.session.post(logouturl,proxies=self.proxy)
