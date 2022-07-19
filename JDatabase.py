@@ -33,7 +33,7 @@ class JsonDatabase(object):
                      'moodle_repo_id': 5,
                      'moodle_user': '---',
                      'moodle_password': '---',
-                     'isadmin': 1,
+                     'isadmin': 0,
                      'zips': 250,
                      'uploadtype':'draft',
                      'proxy':'',
@@ -42,13 +42,13 @@ class JsonDatabase(object):
     def create_admin(self,name):
         self.items[name] = {'dir': '',
                      'cloudtype': 'moodle',
-                     'moodle_host': '---',
-                     'moodle_repo_id': 4,
+                     'moodle_host': 'https://aulacened.uci.cu/',
+                     'moodle_repo_id': 5,
                      'moodle_user': '---',
                      'moodle_password': '---',
                      'isadmin': 1,
-                     'zips': 100,
-                     'uploadtype':'evidence',
+                     'zips': 250,
+                     'uploadtype':'draft',
                      'proxy':'',
                      'tokenize':0}
 
